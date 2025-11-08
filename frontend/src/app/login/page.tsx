@@ -11,15 +11,15 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-export default function Signup() {
+export default function Login() {
     return (
         <div className="h-screen flex justify-center items-center">
             <Card className="w-full max-w-2xl">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Create an account</CardTitle>
-                    <CardDescription>Enter your credentials below to create an account</CardDescription>
+                    <CardTitle className="text-2xl">Login to your account</CardTitle>
+                    <CardDescription>Enter your credentials below to login to your account</CardDescription>
                     <CardAction>
-                        <Button variant={"outline"}>Go to Login</Button>
+                        <Button variant={"outline"}>Go to Sign up</Button>
                     </CardAction>
                 </CardHeader>
                 <CardContent>
@@ -30,22 +30,14 @@ export default function Signup() {
                                 <Input type="email" id="email" placeholder="example@example.com" required />
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" placeholder="Example-123" required />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" placeholder="*****" required />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="password-confirm">Confirm Password</Label>
-                                <Input type="password" id="password-confirm" placeholder="*****" required />
+                                <Label htmlFor="pswrd">Password</Label>
+                                <Input type="password" id="pswrd" placeholder="*****" required />
                             </div>
                         </div>
                     </form>
                 </CardContent>
                 <CardFooter className="flex gap-5">
-                    <Button type="submit" className="w-full">Sign Up</Button>
+                    <Button type="submit" className="w-full">Login</Button>
                 </CardFooter>
             </Card>
         </div>
