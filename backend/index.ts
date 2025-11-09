@@ -1,14 +1,23 @@
-import Express = require('express');
-import mongoose = require('mongoose');
-import dotenv = require('dotenv');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import SignupRouter from "./routes/signup/route.js";
+import LoginRouter from "./routes/login/route.js";
+import DashboardRouter from "./routes/dashboard/route.js";
+import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 
-const app = Express();
+const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || '';
 
-app.use(Express.json());
+app.use(express.json());
+app.use("/signup", SignupRouter);
+app.use("/login", LoginRouter);
+app.use("/dashboard", DashboardRouter);
+
+app.use(errorHandler);
 
 mongoose
     .connect(MONGODB_URI)
@@ -23,5 +32,5 @@ mongoose
     });
 
 app.get('/', (_req, res) => {
-    res.send('Backend is running!');
+    res.send('NoteNest\'s Backend is running!');
 });
