@@ -8,18 +8,18 @@ router.post("/", async (req, res, next) => {
     try {    
         const { email, password } = req.body;
 
-        const user = await UserModel.findOne({ email }).select("+authentication.password +authentication.salt");
-        if (!user || !user.authentication) {
+        const user = await UserModel.findOne({ email }).select("+password +salt +sessionToken");
+        if (!user) {
             return res.status(401).json({ success: false, message: "Invalid email" });
         }
 
-        const validPassword = await comparePassword(password, user.authentication.password);
+        const validPassword = await comparePassword(password, user.password);
         if (!validPassword) {
             return res.status(401).json({ success: false, message: "Invalid password" });
         }
 
         const sessionToken = generateToken(user._id.toString());
-        user.authentication.sessionToken = sessionToken;
+        user.sessionToken = sessionToken;
         await user.save();
         res.status(200).json({ 
             success: true,
