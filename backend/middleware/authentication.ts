@@ -1,23 +1,25 @@
 import type { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt";
 
-
 export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
-            return res.status(401).json({ success: false, message: "No token provided" });
+            throw { statusCode: 401, message: "No token provided" };
         }
 
         const token = authHeader.split(" ")[1];
         if (!token) {
-            return res.status(401).json({ success: false, message: "Malformed token" });
+            throw { statusCode: 401, message: "Malformed token" };
         }
         
         const payload = verifyToken(token);
+        if (!payload) {
+            throw { statusCode: 401, message: "Invalid or expired token" };
+        }
         (req as any).user = payload;
         next();
     } catch (error) {
-        return res.status(401).json({ success: false, message: "Invalid or expired token" });
+        next(error);
     }
 }

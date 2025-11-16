@@ -6,8 +6,8 @@ const router = express.Router();
 router.get("/", requireAuth, (req, res) => {
   res.json({
     success: true,
-    message: "You accessed the dashboard!",
-    user: (req as any).user
+    message: "Welcome to your dashboard",
+    user: (req as any).user,
   });
 });
 
