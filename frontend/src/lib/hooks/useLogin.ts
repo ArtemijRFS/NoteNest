@@ -26,10 +26,9 @@ export function useLogin(){
                 })
             });
             const result = await res.json();
-            if (!res.ok) {
-                throw new Error(result.message || "Login failed");
-            }
+            if (!res.ok) throw new Error(result.message || "Login failed");
             localStorage.setItem("token", result.token);
+            localStorage.setItem("user", JSON.stringify(result.user));
             router.push("/dashboard");
         } catch(error: unknown) {
             if (error instanceof Error) {

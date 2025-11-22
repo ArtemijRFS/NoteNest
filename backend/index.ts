@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import SignupRouter from "./routes/signup/route.js";
 import LoginRouter from "./routes/login/route.js";
 import DashboardRouter from "./routes/dashboard/route.js";
+import ProjectRouter from "./routes/projects/route.js";
+import NoteRouter from "./routes/notes/route.js";
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use("/signup", SignupRouter);
 app.use("/login", LoginRouter);
 app.use("/dashboard", DashboardRouter);
+app.use("/projects", ProjectRouter);
+app.use("/notes", NoteRouter);
 
 app.use(errorHandler);
 
